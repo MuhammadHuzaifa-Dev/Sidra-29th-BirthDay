@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="ur-PK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Sidra | My Dearest Heerni 🦌💖</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!-- Tailwind Custom Color Configurations -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        roseGold: '#E8A0BF',
+                        darkPurple: '#0d0114',
+                        deepViolet: '#28023D',
+                        accentPink: '#FF69B4',
+                        softGold: '#FFD700',
+                        glassBg: 'rgba(255, 255, 255, 0.07)'
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Poppins', 'sans-serif'],
+                        cursive: ['Dancing Script', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0b0112;
+            color: #f3e8ff;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Ambient Glow Backdrop Blur */
+        .ambient-glow {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.45;
+        }
+
+        /* Glassmorphism Card Style */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 105, 180, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+        }
+
+        .gold-glow {
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.35);
+        }
+
+        .pink-glow {
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.35);
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFD700 0%, #FFF8DC 50%, #E8A0BF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .pink-gradient-text {
+            background: linear-gradient(135deg, #FF69B4 0%, #FFB6C1 50%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Candle flame flicker animation */
+        @keyframes flicker {
+            0%, 100% { transform: scale(1) rotate(-2deg); opacity: 0.95; }
+            50% { transform: scale(1.18) rotate(2deg); opacity: 1; filter: drop-shadow(0 0 12px #ffdf00); }
+        }
+        .flame {
+            animation: flicker 0.5s infinite alternate ease-in-out;
+            transform-origin: bottom center;
+        }
+
+        /* Floating background elements */
+        .floating-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            animation: floatUp 11s infinite linear;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(105vh) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            20% { opacity: 0.85; }
+            80% { opacity: 0.85; }
+            100% {
+                transform: translateY(-10vh) rotate(360deg) scale(1.1);
+                opacity: 0;
+            }
+        }
+
+        /* Masonry Grid Setup for Collage */
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 1.25rem;
+        }
+        @media (min-width: 640px) {
+            .masonry-grid { column-count: 2; }
+        }
+        @media (min-width: 1024px) {
+            .masonry-grid { column-count: 3; }
+        }
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.25rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Pulse heartbeat animation */
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+        .animate-heartbeat {
+            animation: heartbeat 1.8s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen selection:bg-pink-500 selection:text-white">
+<audio src="Alfaaz Hamza Malik x Zain Zohaib Official Visualiser.mp3" autoplay controls hidden></audio>
+    <!-- Dynamic Ambient Lighting Background Blurs -->
+    <div class="ambient-glow bg-purple-600 w-96 h-96 top-10 -left-20"></div>
+    <div class="ambient-glow bg-pink-600 w-96 h-96 top-1/2 -right-20"></div>
+    <div class="ambient-glow bg-indigo-700 w-96 h-96 bottom-10 left-1/3"></div>
+
+    <!-- Floating Background Particles -->
+    <div id="particle-container" class="fixed inset-0 pointer-events-none z-0"></div>
+
+    <!-- Music Player Controller -->
+    <div class="fixed top-4 right-4 z-50 flex items-center gap-2">
+        <button id="music-btn" onclick="toggleMusic()" class="glass-card px-4 py-2.5 rounded-full text-pink-300 hover:text-white hover:bg-pink-900/50 border border-pink-500/40 transition flex items-center gap-2.5 text-xs md:text-sm font-semibold shadow-2xl backdrop-blur-md active:scale-95">
+            <i id="music-icon" class="fa-solid fa-compact-disc text-pink-400 text-base"></i>
+            <span id="music-status-text">Song: Alfaaz (Tap to Play 🎵)</span>
+        </button>
+    </div>
+
+    <!-- Hidden YouTube Player Container for "Alfaaz by Abdul Hannan" -->
+    <div class="hidden">
+        <iframe id="youtube-player" 
+                src="https://www.youtube.com/embed/cQq6iLF66Gc?enablejsapi=1&autoplay=0&loop=1&playlist=cQq6iLF66Gc" 
+                allow="autoplay">
+        </iframe>
+    </div>
+
+    <!-- ================= 1. WELCOME / ENVELOPE GATE ================= -->
+    <section id="welcome-screen" class="relative z-10 min-h-screen flex items-center justify-center p-4">
+        <div class="max-w-md w-full text-center glass-card p-8 md:p-10 rounded-3xl pink-glow border border-pink-500/30 relative overflow-hidden">
+            
+            <div class="inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-widest text-softGold uppercase bg-softGold/10 border border-softGold/30 mb-6 shadow-sm animate-pulse">
+                ✨ 15 October • Special Day ✨
+            </div>
+
+            <div class="relative w-28 h-28 mx-auto mb-6 flex items-center justify-center">
+                <div class="absolute inset-0 bg-gradient-to-tr from-pink-500 to-purple-600 rounded-full animate-ping opacity-20"></div>
+                <div class="w-24 h-24 bg-gradient-to-br from-pink-500/30 to-purple-800/40 rounded-full border border-pink-400/50 flex items-center justify-center text-5xl shadow-inner">
+                    💌
+                </div>
+            </div>
+
+            <h1 class="font-serif text-4xl md:text-5xl font-bold mb-2 gold-gradient-text">
+                For Sidra
+            </h1>
+            <p class="font-cursive text-3xl text-pink-300 mb-6">My Dearest Heerni 🦌💖</p>
+
+            <div class="my-6 p-5 rounded-2xl bg-purple-950/50 border border-pink-500/20 text-left backdrop-blur-sm">
+                <p class="text-xs md:text-sm text-purple-200 leading-relaxed font-sans mb-2">
+                    Bunder ki taraf se uski sab se pyari Heerni ke liye chota sa birthday surprise web experience! 🎁✨
+                </p>
+                <div class="text-[11px] text-softGold/90 font-mono text-right">- Tumhara Bunder 🐒</div>
+            </div>
+
+            <button onclick="openBirthdaySite()" class="w-full py-4 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 hover:from-pink-600 hover:to-indigo-700 text-white font-bold text-base md:text-lg shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-3 border border-pink-400/30">
+                <i class="fa-solid fa-envelope-open-text text-xl"></i> Surprise Kholo Heerni! 💌
+            </button>
+            
+            <p class="text-[11px] text-pink-300/80 mt-4 flex items-center justify-center gap-1">
+                <i class="fa-solid fa-music text-pink-400"></i> Tap karte hi background song <b>"Alfaaz"</b> play ho jayega!
+            </p>
+        </div>
+    </section>
+
+    <!-- ================= 2. MAIN WEBSITE CONTENT (Initially Hidden) ================= -->
+    <main id="main-content" class="hidden opacity-0 transition-opacity duration-1000 relative z-10 pb-20">
+
+        <!-- Top Header / Banner -->
+        <header class="pt-16 pb-12 px-4 text-center max-w-4xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-semibold tracking-wider text-softGold bg-softGold/10 border border-softGold/30 mb-6 shadow-md">
+                🎂 15 OCTOBER • HAPPY BIRTHDAY SIDRA 🎂
+            </div>
+            
+            <h1 class="font-serif text-5xl md:text-7xl font-bold mb-4 gold-gradient-text tracking-wide drop-shadow-md">
+                Happy Birthday, Sidra!
+            </h1>
+            
+            <p class="font-cursive text-3xl md:text-5xl text-pink-300 mb-6">
+                To My Graceful Heerni 🦌✨
+            </p>
+            
+            <p class="max-w-2xl mx-auto text-purple-200 text-sm md:text-base leading-relaxed font-light glass-card p-6 rounded-2xl border border-pink-500/20 shadow-lg">
+                Tumhare is special din par, Bunder ki taraf se dher sari duayein, pyaar aur khushiyan. Tum hamesha aise hi muskurati raho aur apni grace se sabka dil jeetti raho! ❤️
+            </p>
+        </header>
+
+        <!-- ================= 3. BEAUTIFUL PHOTO GALLERY (MASONRY COLLAGE) ================= -->
+        <section class="max-w-6xl mx-auto px-4 my-16">
+            <div class="text-center mb-8">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-2">Heerni ki Haseen Yadein 📸</h2>
+                <p class="text-pink-300 text-xs md:text-sm max-w-lg mx-auto">Portrait aur Landscape pictures ka khoobsurat collage • Kisi bhi picture par tap karke enlarge karein!</p>
+            </div>
+
+            <!-- Gallery Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-2 mb-8">
+                <button onclick="filterGallery('all')" class="gallery-filter-btn px-4 py-1.5 rounded-full text-xs font-medium border border-pink-500/40 bg-pink-500 text-white shadow-md transition">Sub Picture 🌸</button>
+                <button onclick="filterGallery('portrait')" class="gallery-filter-btn px-4 py-1.5 rounded-full text-xs font-medium border border-pink-500/40 bg-purple-950/60 text-purple-200 hover:bg-pink-500 hover:text-white transition">Portrait 📱</button>
+                <button onclick="filterGallery('landscape')" class="gallery-filter-btn px-4 py-1.5 rounded-full text-xs font-medium border border-pink-500/40 bg-purple-950/60 text-purple-200 hover:bg-pink-500 hover:text-white transition">Landscape 🖼️</button>
+            </div>
+
+            <!-- Masonry Grid for Portrait and Landscape Mix -->
+            <div class="masonry-grid" id="gallery-masonry">
+                
+                <!-- Photo 1 (Portrait) -->
+                <div class="masonry-item portrait cursor-pointer group" onclick="openPhotoModal(this)">
+                    <div class="glass-card rounded-2xl overflow-hidden p-2 transition-all duration-300 group-hover:scale-[1.02] group-hover:border-pink-400">
+                        <img src="2.jpg" alt="Sidra Photo" class="w-full h-80 object-cover rounded-xl">
+                        <div class="p-3 text-center">
+                            <p class="text-pink-200 font-cursive text-lg">Pyari Heerni 🦌</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 2 (Landscape) -->
+                <div class="masonry-item landscape cursor-pointer group" onclick="openPhotoModal(this)">
+                    <div class="glass-card rounded-2xl overflow-hidden p-2 transition-all duration-300 group-hover:scale-[1.02] group-hover:border-pink-400">
+                        <img src="3.jpg" alt="Sidra Photo" class="w-full h-50 object-cover rounded-xl">
+                        <div class="p-3 text-center">
+                            <p class="text-pink-200 font-cursive text-lg">Haseen Smile ✨</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 3 (Portrait) -->
+                <div class="masonry-item portrait cursor-pointer group" onclick="openPhotoModal(this)">
+                    <div class="glass-card rounded-2xl overflow-hidden p-2 transition-all duration-300 group-hover:scale-[1.02] group-hover:border-pink-400">
+                        <img src="1.jpg" alt="Sidra Photo" class="w-full h-98 object-cover rounded-xl">
+                        <div class="p-3 text-center">
+                            <p class="text-pink-200 font-cursive text-lg">Bunder ki Favorite 🐒❤️</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 4 (Landscape) -->
+                <div class="masonry-item landscape cursor-pointer group" onclick="openPhotoModal(this)">
+                    <div class="glass-card rounded-2xl overflow-hidden p-2 transition-all duration-300 group-hover:scale-[1.02] group-hover:border-pink-400">
+                        <img src="4.jpg" alt="Sidra Photo" class="w-full h-50 object-cover rounded-xl">
+                        <div class="p-3 text-center">
+                            <p class="text-pink-200 font-cursive text-lg">Special Memories 🌸</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 5 (Portrait) -->
+                <div class="masonry-item portrait cursor-pointer group" onclick="openPhotoModal(this)">
+                    <div class="glass-card rounded-2xl overflow-hidden p-2 transition-all duration-300 group-hover:scale-[1.02] group-hover:border-pink-400">
+                        <img src="5.jpg" alt="Sidra Photo" class="w-full h-81 object-cover rounded-xl">
+                        <div class="p-3 text-center">
+                            <p class="text-pink-200 font-cursive text-lg">15 October Queen 👑</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Photo 6 (Landscape) -->
+                <div class="masonry-item landscape cursor-pointer group" onclick="openPhotoModal(this)">
+                    <div class="glass-card rounded-2xl overflow-hidden p-2 transition-all duration-300 group-hover:scale-[1.02] group-hover:border-pink-400">
+                        <img src="6.jpg" alt="Sidra Photo" class="w-full h-58 object-cover rounded-xl">
+                        <div class="p-3 text-center">
+                            <p class="text-pink-200 font-cursive text-lg">Forever Beautiful 💕</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <p class="text-center text-[11px] text-purple-300/80 mt-4 font-mono">💡 Tip: Apni real images dynamic URL lagane ke liye standard HTML image tag me `src` path replace kar sakte hain.</p>
+        </section>
+
+        <!-- ================= 4. BUNDER & HEERNI 10-QUESTION QUIZ ================= -->
+        <section class="max-w-2xl mx-auto px-4 my-20">
+            <div class="text-center mb-8">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-2">Bunder & Heerni Special Quiz 🧠💖</h2>
+                <p class="text-pink-300 text-xs md:text-sm">Chalein dekhte hain Sidra ko kitne jawab sahi aate hain!</p>
+            </div>
+
+            <div class="glass-card p-6 md:p-8 rounded-3xl border border-pink-500/30 pink-glow relative">
+                
+                <!-- Quiz Progress Bar -->
+                <div class="mb-6">
+                    <div class="flex justify-between text-xs font-semibold text-purple-300 mb-2">
+                        <span id="quiz-progress-text">Sawal 1 / 10</span>
+                        <span id="quiz-score-text">Score: 0</span>
+                    </div>
+                    <div class="w-full h-2.5 bg-purple-950 rounded-full overflow-hidden border border-pink-500/20">
+                        <div id="quiz-progress-bar" class="h-full bg-gradient-to-r from-pink-500 to-purple-500 w-[10%] transition-all duration-300"></div>
+                    </div>
+                </div>
+
+                <!-- Quiz Box Dynamic Content -->
+                <div id="quiz-box" class="bg-purple-950/60 p-5 md:p-6 rounded-2xl border border-pink-500/20 shadow-sm min-h-[280px] flex flex-col justify-between backdrop-blur-sm">
+                    <div>
+                        <h3 id="quiz-question" class="font-serif text-base md:text-lg font-bold text-white mb-5 leading-relaxed">
+                            Loading Sawal...
+                        </h3>
+                        <div id="quiz-options" class="grid grid-cols-1 gap-2.5">
+                            <!-- Options injected dynamically by JS -->
+                        </div>
+                    </div>
+                    <p id="quiz-feedback" class="text-xs md:text-sm font-medium text-center mt-4 min-h-[28px] text-pink-300 leading-relaxed bg-purple-900/40 p-2 rounded-xl border border-pink-500/10"></p>
+                </div>
+
+                <!-- Quiz Completed Screen -->
+                <div id="quiz-result" class="hidden text-center py-8">
+                    <div class="text-6xl mb-4 animate-bounce">🏆</div>
+                    <h3 class="font-serif text-2xl md:text-3xl font-bold text-pink-300 mb-2">Quiz Complete Ho Gaya!</h3>
+                    <p id="result-text" class="text-purple-200 text-sm md:text-base mb-6">Tumne score kiya!</p>
+                    <button onclick="window.restartQuiz()" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-8 py-3 rounded-full font-medium shadow-lg hover:scale-105 active:scale-95 transition-all text-sm border border-pink-400/30">
+                        Dobara Khelo 🔄
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= 5. CAKE CUTTING & CANDLE BLOWING ================= -->
+        <section class="max-w-xl mx-auto px-4 my-20 text-center">
+            <div class="glass-card p-8 rounded-3xl pink-glow border border-pink-500/30 relative">
+                <h2 class="font-serif text-3xl font-bold mb-2 gold-gradient-text">Make a Wish, Heerni! 🎂</h2>
+                <p class="text-purple-200 text-xs mb-8">Candles phoonk maaro aur wish maango!</p>
+
+                <!-- Interactive Cake Graphic -->
+                <div class="relative w-56 h-52 mx-auto my-3 flex items-end justify-center">
+                    <!-- Base Cake -->
+                    <div class="w-48 h-28 bg-gradient-to-t from-purple-950 via-pink-600 to-pink-500 rounded-3xl relative shadow-2xl border border-pink-400/30 flex items-center justify-center">
+                        <div class="absolute top-0 w-full h-7 bg-white/95 rounded-t-3xl flex justify-around items-center px-3">
+                            <div class="w-2.5 h-5 bg-pink-400 rounded-full animate-pulse"></div>
+                            <div class="w-2.5 h-6 bg-pink-400 rounded-full animate-pulse"></div>
+                            <div class="w-2.5 h-4 bg-pink-400 rounded-full animate-pulse"></div>
+                            <div class="w-2.5 h-5 bg-pink-400 rounded-full animate-pulse"></div>
+                        </div>
+                        <span class="font-cursive text-3xl text-white font-bold drop-shadow-md">Sidra</span>
+                    </div>
+
+                    <!-- Candles Container -->
+                    <div id="candles-container" class="absolute -top-6 w-36 flex justify-around z-20">
+                        <!-- Candle 1 -->
+                        <div class="flex flex-col items-center">
+                            <div id="flame-1" class="w-4 h-6 bg-amber-300 rounded-full flame shadow-lg shadow-amber-300/80 transition-all duration-300"></div>
+                            <div class="w-2.5 h-10 bg-gradient-to-b from-white to-pink-200 rounded-sm shadow-sm border border-pink-300/50"></div>
+                        </div>
+                        <!-- Candle 2 -->
+                        <div class="flex flex-col items-center">
+                            <div id="flame-2" class="w-4 h-6 bg-amber-300 rounded-full flame shadow-lg shadow-amber-300/80 transition-all duration-300" style="animation-delay: 0.2s;"></div>
+                            <div class="w-2.5 h-10 bg-gradient-to-b from-white to-pink-200 rounded-sm shadow-sm border border-pink-300/50"></div>
+                        </div>
+                        <!-- Candle 3 -->
+                        <div class="flex flex-col items-center">
+                            <div id="flame-3" class="w-4 h-6 bg-amber-300 rounded-full flame shadow-lg shadow-amber-300/80 transition-all duration-300" style="animation-delay: 0.4s;"></div>
+                            <div class="w-2.5 h-10 bg-gradient-to-b from-white to-pink-200 rounded-sm shadow-sm border border-pink-300/50"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="blow-btn" onclick="blowCandles()" class="mt-4 px-8 py-3.5 rounded-2xl bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold text-base shadow-xl hover:scale-105 active:scale-95 transition flex items-center justify-center gap-2 mx-auto border border-pink-400/30">
+                    <i class="fa-solid fa-wind"></i> Candles Blow Karo! 🕯️
+                </button>
+
+                <!-- Hidden Wish Card -->
+                <div id="wish-message" class="hidden mt-6 p-5 rounded-2xl bg-purple-950/90 border border-softGold/40 text-softGold font-serif text-sm leading-relaxed shadow-xl animate-fade-in">
+                    ✨ "May all your dreams blossom into reality today and forever, my beautiful Heerni! Always keep smiling! - Bunder 🐒" ✨
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= 6. REASONS WHY BUNDER LOVES HEERNI ================= -->
+        <section class="max-w-xl mx-auto px-4 my-16 text-center">
+            <div class="glass-card p-6 rounded-3xl border border-pink-500/30">
+                <h3 class="font-serif text-2xl font-bold gold-gradient-text mb-3">Notes for Heerni 💖</h3>
+                <p id="love-reason-text" class="font-cursive text-2xl text-pink-200 my-4 min-h-[60px] flex items-center justify-center px-4">
+                    "Tap below to see a secret reason! ✨"
+                </p>
+                <button onclick="generateLoveReason()" class="px-6 py-2.5 rounded-full bg-purple-900/60 hover:bg-pink-600/80 text-purple-100 border border-pink-400/30 text-xs font-semibold shadow-md active:scale-95 transition">
+                    Another Reason! 🎲✨
+                </button>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center py-10 px-4 border-t border-white/10 max-w-2xl mx-auto mt-16">
+            <p class="font-cursive text-3xl text-pink-300 mb-1">Always Yours,</p>
+            <h3 class="font-serif text-2xl font-bold gold-gradient-text mb-4">Bunder 🐒 & Heerni 🦌</h3>
+            <p class="text-xs text-purple-300">Created with love for Sidra's Birthday • 15 October</p>
+        </footer>
+
+    </main>
+
+    <!-- Photo Lightbox Zoom Modal -->
+    <div id="photo-modal" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-4 backdrop-blur-md" onclick="closePhotoModal()">
+        <div class="max-w-3xl w-full max-h-[90vh] flex flex-col items-center">
+            <img id="modal-img" src="" alt="Enlarged Photo" class="max-h-[80vh] w-auto object-contain rounded-2xl border border-pink-500/40 shadow-2xl">
+            <p class="text-purple-200 text-sm mt-3 font-cursive text-2xl" id="modal-caption"></p>
+            <button class="mt-4 text-xs text-white/70 hover:text-white bg-white/10 px-4 py-2 rounded-full border border-white/20">Tap anywhere to close ✖</button>
+        </div>
+    </div>
+
+    <!-- Application JavaScript Logic -->
+    <script>
+        // 1. Particle Background Generation
+        function createParticles() {
+            const container = document.getElementById('particle-container');
+            const icons = ['✨', '💖', '🦌', '🌸', '👑', '🎉', '🐒', '🎈'];
+            
+            for (let i = 0; i < 24; i++) {
+                const p = document.createElement('div');
+                p.className = 'floating-particle text-lg md:text-2xl';
+                p.innerText = icons[Math.floor(Math.random() * icons.length)];
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.animationDuration = (7 + Math.random() * 8) + 's';
+                p.style.animationDelay = (Math.random() * 5) + 's';
+                container.appendChild(p);
+            }
+        }
+        createParticles();
+
+        // 2. Music Toggle and Auto-play Logic for YouTube Embed ("Alfaaz")
+        let isPlaying = false;
+        
+        function toggleMusic() {
+            const iframe = document.getElementById('youtube-player');
+            const btnText = document.getElementById('music-status-text');
+            const icon = document.getElementById('music-icon');
+
+            if (!isPlaying) {
+                iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                isPlaying = true;
+                btnText.innerText = "Song: Alfaaz 🎵 (Playing)";
+                icon.classList.add('animate-spin');
+            } else {
+                iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+                isPlaying = false;
+                btnText.innerText = "Song: Alfaaz (Paused)";
+                icon.classList.remove('animate-spin');
+            }
+        }
+
+        // 3. Welcome Screen Open Transition
+        function openBirthdaySite() {
+            const welcome = document.getElementById('welcome-screen');
+            const main = document.getElementById('main-content');
+            
+            toggleMusic();
+
+            welcome.classList.add('transition-all', 'duration-700', 'opacity-0', 'scale-95');
+            setTimeout(() => {
+                welcome.classList.add('hidden');
+                main.classList.remove('hidden');
+                setTimeout(() => {
+                    main.classList.remove('opacity-0');
+                    if (typeof confetti === 'function') {
+                        confetti({ particleCount: 140, spread: 85, origin: { y: 0.5 } });
+                    }
+                }, 50);
+            }, 700);
+        }
+
+        // 4. Photo Lightbox Modal & Filtering
+        function openPhotoModal(card) {
+            const img = card.querySelector('img');
+            const caption = card.querySelector('p');
+            const modal = document.getElementById('photo-modal');
+            
+            document.getElementById('modal-img').src = img.src;
+            document.getElementById('modal-caption').innerText = caption ? caption.innerText : '';
+            modal.classList.remove('hidden');
+        }
+
+        function closePhotoModal() {
+            document.getElementById('photo-modal').classList.add('hidden');
+        }
+
+        function filterGallery(category) {
+            const items = document.querySelectorAll('.masonry-item');
+            const btns = document.querySelectorAll('.gallery-filter-btn');
+
+            items.forEach(item => {
+                if (category === 'all') {
+                    item.style.display = 'block';
+                } else if (item.classList.contains(category)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // 5. Candles Blow Simulation
+        function blowCandles() {
+            const f1 = document.getElementById('flame-1');
+            const f2 = document.getElementById('flame-2');
+            const f3 = document.getElementById('flame-3');
+
+            if (f1) f1.classList.add('opacity-0', 'scale-0');
+            if (f2) f2.classList.add('opacity-0', 'scale-0');
+            if (f3) f3.classList.add('opacity-0', 'scale-0');
+
+            setTimeout(() => {
+                if (f1) f1.classList.add('hidden');
+                if (f2) f2.classList.add('hidden');
+                if (f3) f3.classList.add('hidden');
+            }, 300);
+
+            const wish = document.getElementById('wish-message');
+            if (wish) wish.classList.remove('hidden');
+
+            const btn = document.getElementById('blow-btn');
+            if (btn) btn.innerHTML = '<i class="fa-solid fa-sparkles"></i> Wish Sent to Stars! ✨';
+
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+            }
+        }
+
+        // 6. Reasons Generator
+        const loveReasons = [
+            "Heerni ki pyari hansi bunder ka din bana deti hai! 😄💖",
+            "Heerni ki eyes ek dam graceful hain! 🦌✨",
+            "Heerni bunder ka hamesha khayal rakhti hai! 🐒❤️",
+            "Sidra ke sath bitaya hua har lamha special hota hai! 🌸",
+            "Heerni ki innocent aur cute baatein! 💕",
+            "Bunder aur Heerni ki jodi duniya mein sab se best hai! 🏆✨"
+        ];
+        function generateLoveReason() {
+            const target = document.getElementById('love-reason-text');
+            const random = loveReasons[Math.floor(Math.random() * loveReasons.length)];
+            target.innerText = `"${random}"`;
+        }
+
+        // 7. ALL 10 CUSTOMIZED QUIZ QUESTIONS (EXACT USER SPECIFICATIONS)
+        window.quizData = [
+            {
+                q: "1. Sidra aur bunder konsa month mai dono sath school aye thy?",
+                options: ["A) November", "B) December", "C) January", "D) March"],
+                correctIndices: [1],
+                customResponses: {
+                    1: "Sahi jawab lekin phely Sidra ayi thi! 🙈✨"
+                },
+                defaultFun: "December hi toh woh month tha jab dono sath aye thy! ❄️✨"
+            },
+            {
+                q: "2. Jab bunder ne Sidra ko phely dafa dekha to bunder ne kia feel kia?",
+                options: [
+                    "A) Oh mah turu luv ❤️", 
+                    "B) Bunder ki raatan urrgai 🌙💫", 
+                    "C) Kuch bhi nahi", 
+                    "D) Darr gaya 🙈"
+                ],
+                correctIndices: [0, 1],
+                customResponses: {
+                    0: "Oh mah turu luv! ❤️ Bunder ke hosh pehli nazar mein hi urr gaye thy! 😍💖",
+                    1: "Bunder ki raatan urrgai! 🌙💫 Dono hi bilkul sach hain, pehli nazar mein hi dil aagaya tha! 😍💖"
+                },
+                defaultFun: "Awww! Dono hi bilkul sach hain! Bunder ke hosh pehli nazar mein hi urr gaye thy! 😍💖"
+            },
+            {
+                q: "3. Sidra sab se zayda kisa dhoti hai?",
+                options: [
+                    "A) Bunder ki sothan (Bartan hahaha) 🍽️", 
+                    "B) Bunder ko hahaha 🐒", 
+                    "C) Kapry ko 👕"
+                ],
+                correctIndices: [0, 1],
+                customResponses: {
+                    0: "Hahaha! 🍽️ Bartan se ziada pyaar hai dhonay mein! 😂🧼",
+                    1: "Ary Bhaye! 🙈🤣 Bunder ki toh hamesha shamat hi rehti hai!"
+                },
+                defaultFun: "Sahi pakde hain! Sidra ki dhulai mashhoor hai! 😂"
+            },
+            {
+                q: "4. Sidra sab se zyada kia pasand karti hai?",
+                options: [
+                    "A) Pasta 🍝", 
+                    "B) Chocolate Fudge 🍫", 
+                    "C) Bunder 🐒❤️", 
+                    "D) Sab Kuch 🎁"
+                ],
+                correctIndices: [2],
+                customResponses: {
+                    2: "Sahi pakde hain! 🐒❤️ Bunder hi toh Heerni ka sab se favorite hai! 😘🎉",
+                    0: "Pasta pasand toh hai lekin Bunder se kam! 🍝❤️",
+                    1: "Chocolate Fudge tasty hai par Bunder jitna nahi! 🍫💖"
+                },
+                defaultFun: "Sahi pakde hain! Bunder hi toh Heerni ka favorite hai! 😘🎉"
+            },
+            {
+                q: "5. Sidra kis chiz se zyada tang hui thi?",
+                options: [
+                    "A) Sir Asad ka new beard style dekh ke haha 🧔", 
+                    "B) Bunder ki uri hui mocha dekhe 🧔‍♂️", 
+                    "C) Ya Sir Abdul Ala ko zyada bolta dekha 🗣️", 
+                    "D) Ye teeno dekh ke hi tang aayi thi! 🙈🤣"
+                ],
+                correctIndices: [0, 1, 2, 3],
+                customResponses: {
+                    0: "Haha Sir Asad ki new beard style ek alag hi level thi! 🧔🤣",
+                    1: "Bunder ki urri hui moochen dekh ke Heerni hass hass ke thak gayi thi! 🙈",
+                    2: "Sir Abdul Ala ki non-stop baatein! 🗣️ Hahaha!",
+                    3: "Sahi pakde hain! Teeno baatein hi ek se barh kar ek hain! 😂🔥"
+                },
+                defaultFun: "Heerni tang toh sab se hi hui thi! 🤣"
+            },
+            {
+                q: "6. WIG ka sab se acha use kisne kiya?",
+                options: [
+                    "A) School walo ne 🏫", 
+                    "B) Bunder aur Heerni ne 🐒🦌✨", 
+                    "C) Kisi ne nahi ❌"
+                ],
+                correctIndices: [1],
+                customResponses: {
+                    1: "Obviously Bunder aur Heerni ne! Unse acha style designer konsa ho sakta hai! 💇‍♂️💖"
+                },
+                defaultFun: "Bunder aur Heerni ka wig game strong tha! 😎"
+            },
+            {
+                q: "7. Bunder jab bhi koi crazy ya silly bat karta hai toh Sidra ka kia reaction hota hai?",
+                options: [
+                    "A) Apni pyari hansi hansi karti hai 💖", 
+                    "B) Bunder ko daant ti hai 🙈", 
+                    "C) 'Arey Bunder tum sudhro ge nahi' kehndi hai 🐒", 
+                    "D) Ye teeno hi karti hai! 😂"
+                ],
+                correctIndices: [3],
+                customResponses: {
+                    3: "Bilkul Sahi! Teeno baatein ek sath hoti hain! 😂💖"
+                },
+                defaultFun: "Teeno hi bunder ki favorite reaction hain! 😂"
+            },
+            {
+                q: "8. Sidra ko 'Heerni' nickname kyun mila?",
+                options: [
+                    "A) Chunkey eyes aur graceful style ki waja se 🦌✨", 
+                    "B) Bunder ko stylish lagi 💖", 
+                    "C) Bus Bunder ka dil kia! 🐒"
+                ],
+                correctIndices: [0],
+                customResponses: {
+                    0: "Sach mein! Unki aankhein aur grace ek dam Heerni jaisi hai! 🦌💖"
+                },
+                defaultFun: "Heerni jaisi innocence aur grace ki waja se! ✨"
+            },
+            {
+                q: "9. October 15 Bunder ke liye kyun special hai?",
+                options: [
+                    "A) Kyun ke is din uski pyari Heerni is dunya mein ayi thi 👑🎉", 
+                    "B) Cake khane ko milta hai 🎂", 
+                    "C) Holiday hota hai 🎈"
+                ],
+                correctIndices: [0],
+                customResponses: {
+                    0: "Mubarak ho! Sab se pyara din jab dunya ko Sidra mili! 💖👑"
+                },
+                defaultFun: "Sab se special din for Bunder! 👑🎉"
+            },
+            {
+                q: "10. Sidra aur Bunder ka bond kaisa hai?",
+                options: [
+                    "A) Unbreakable & Forever ❤️", 
+                    "B) Best Friends + Soulmates 💕", 
+                    "C) All of the above 🏆"
+                ],
+                correctIndices: [0, 1, 2, 3],
+                customResponses: {
+                    3: "100% Correct! Forever and Always! 💖🏆"
+                },
+                defaultFun: "Unbreakable & Magical Always! 💖"
+            }
+        ];
+
+        window.currentQIndex = 0;
+        window.score = 0;
+
+        window.loadQuizQuestion = function() {
+            const q = window.quizData[window.currentQIndex];
+            const qQuestion = document.getElementById('quiz-question');
+            const qProgText = document.getElementById('quiz-progress-text');
+            const qScoreText = document.getElementById('quiz-score-text');
+            const qProgBar = document.getElementById('quiz-progress-bar');
+            const qFeedback = document.getElementById('quiz-feedback');
+            const optionsContainer = document.getElementById('quiz-options');
+
+            if (!qQuestion || !optionsContainer) return;
+
+            qQuestion.innerText = q.q;
+            if (qProgText) qProgText.innerText = `Sawal ${window.currentQIndex + 1} / ${window.quizData.length}`;
+            if (qScoreText) qScoreText.innerText = `Score: ${window.score}`;
+            if (qProgBar) qProgBar.style.width = `${((window.currentQIndex + 1) / window.quizData.length) * 100}%`;
+            if (qFeedback) qFeedback.innerText = 'Jawabaat me se click karein...';
+
+            optionsContainer.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'w-full text-left p-3.5 rounded-xl border border-pink-500/20 bg-purple-900/40 hover:bg-pink-950/70 transition-all font-medium text-xs md:text-sm text-purple-100 flex items-center justify-between shadow-sm active:scale-95';
+                btn.innerText = opt;
+                btn.onclick = () => window.selectQuizAnswer(idx, q);
+                optionsContainer.appendChild(btn);
+            });
+        };
+
+        window.selectQuizAnswer = function(selectedIndex, q) {
+            const feedback = document.getElementById('quiz-feedback');
+            const isCorrect = q.correctIndices.includes(selectedIndex);
+
+            if (isCorrect) {
+                window.score++;
+            }
+
+            if (feedback) {
+                if (q.customResponses && q.customResponses[selectedIndex]) {
+                    feedback.innerText = q.customResponses[selectedIndex];
+                } else if (isCorrect) {
+                    feedback.innerText = "✅ " + q.defaultFun;
+                } else {
+                    feedback.innerText = "Arey Heerni ghalti kar di! 😜 Sahi answer Bunder ka favorite tha!";
+                }
+            }
+
+            const qScoreText = document.getElementById('quiz-score-text');
+            if (qScoreText) qScoreText.innerText = `Score: ${window.score}`;
+
+            setTimeout(() => {
+                window.currentQIndex++;
+                if (window.currentQIndex < window.quizData.length) {
+                    window.loadQuizQuestion();
+                } else {
+                    window.showQuizResults();
+                }
+            }, 1800);
+        };
+
+        window.showQuizResults = function() {
+            const quizBox = document.getElementById('quiz-box');
+            const resultScreen = document.getElementById('quiz-result');
+            const resultText = document.getElementById('result-text');
+
+            if (quizBox) quizBox.classList.add('hidden');
+            if (resultScreen) resultScreen.classList.remove('hidden');
+
+            if (resultText) {
+                resultText.innerText = `Sidra, tumne ${window.quizData.length} mein se ${window.score} points score kiye! Tum wakai Bunder ki sab se pyari Heerni ho! 🎉`;
+            }
+
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 160, spread: 90, origin: { y: 0.6 } });
+            }
+        };
+
+        window.restartQuiz = function() {
+            window.currentQIndex = 0;
+            window.score = 0;
+            const resultScreen = document.getElementById('quiz-result');
+            const quizBox = document.getElementById('quiz-box');
+
+            if (resultScreen) resultScreen.classList.add('hidden');
+            if (quizBox) quizBox.classList.remove('hidden');
+            window.loadQuizQuestion();
+        };
+
+        // Initialize quiz on DOM Ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', window.loadQuizQuestion);
+        } else {
+            window.loadQuizQuestion();
+        }
+    </script>
+</body>
+</html>
